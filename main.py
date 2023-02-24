@@ -57,11 +57,15 @@ def main():
 
         # TODO: collect 10 samples of the signal strength at this location, waiting 1 second between each sample
         # HINT: use the get_wifi_signal_strength function
+        for i in range(10):
+           signal_strengths.append(get_wifi_signal_strength())
+           #time.sleep(1)
         
         
+
         # TODO: calculate the mean and standard deviation of the signal strengths you collected at this location
-        signal_strength_mean = None
-        signal_strength_std = None
+        signal_strength_mean = np.mean(signal_strengths)
+        signal_strength_std = np.std(signal_strengths)
 
         # Question 6: What is the standard deviation? Why is it useful to calculate it?
         data.append((location, signal_strength_mean, signal_strength_std))
@@ -78,9 +82,8 @@ def main():
     # HINT: https://plotly.com/python/bar-charts/
     # NOTE: use the error_y parameter of px.bar to plot the error bars (1 standard deviation)
     #   documentation: https://plotly.com/python-api-reference/generated/plotly.express.bar.html
-    fig = px.bar(
+    fig = px.bar(df, x='location', y='signal_strength_mean', error_y='signal_strength_std')
         
-    )
     # Question 8: Why is it important to plot the error bars? What do they tell us?
 
     # write the plot to a file - make sure to commit the PNG file to your repository along with your code
